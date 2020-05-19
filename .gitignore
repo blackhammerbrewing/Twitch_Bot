@@ -4,7 +4,7 @@ __pycache__/
 *$py.class
 
 # config files
-./Twitch_bot/config.py
+/c/Users/mqpar/Documents/Work/bhb/twitch/Twitch_Bot/config.py
 # C extensions
 *.so
 
