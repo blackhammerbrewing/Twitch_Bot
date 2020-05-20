@@ -10,6 +10,7 @@ from src.random import roll_int
 from src.games import voting
 from collections import Counter
 
+
 class Bot(commands.Bot):
 
     def __init__(self):
@@ -24,13 +25,21 @@ class Bot(commands.Bot):
             )
 
     async def event_ready(self):
+        """
+        Bot ready function. Sends a private message to the channel indicating
+        the bot has succesfully landed in the chat.
+        """
         ws = bot._ws
         await ws.send_privmsg(CHANNEL[0], f"/me has landed!")
 
     async def event_message(self, ctx):
+        """
+        Bot message function. Looks for a command in chat and handles the game
+        on mode for user interaction. This is the entry point for community
+        driven events.
+        """
         if self._GAME_ON is True:
             self._WINNERS = voting(self._WINNERS, ctx.author.name, ctx.content)
-            print(ctx.author.name, ctx.content, flush=True)
         await self.handle_commands(ctx)
 
     @commands.command(name='greet')
